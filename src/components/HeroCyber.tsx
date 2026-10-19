@@ -58,18 +58,18 @@ export const HeroCyber: React.FC<HeroCyberProps> = ({ onGoToDemo, onGoToTech }) 
       </div>
 
       {/* Main headline */}
-      <div className="relative z-10 text-center max-w-4xl mx-auto mb-6">
-        <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black font-mono tracking-tight leading-none text-ink-primary mb-2">
+      <div className="relative z-10 text-center max-w-4xl mx-auto mb-6 px-2">
+        <h1 className="text-4xl xs:text-5xl sm:text-7xl lg:text-8xl font-black font-mono tracking-tight leading-none text-ink-primary mb-2">
           TRUTH-X
         </h1>
-        <div className="text-2xl sm:text-3xl lg:text-4xl font-bold font-mono text-ink-secondary mt-3 h-12 flex items-center justify-center gap-0">
-          <span>Mendeteksi&nbsp;</span>
-          <span className="text-cyber-cyan neon-text-cyan min-w-[14ch] text-left">
+        <div className="text-lg xs:text-xl sm:text-3xl lg:text-4xl font-bold font-mono text-ink-secondary mt-2 sm:mt-3 min-h-[2.5rem] flex flex-wrap items-center justify-center gap-1">
+          <span>Mendeteksi</span>
+          <span className="text-cyber-cyan neon-text-cyan text-left">
             {displayed}
-            <span className={`inline-block w-0.5 h-8 bg-cyber-cyan ml-0.5 align-middle ${tick % 2 === 0 ? 'opacity-100' : 'opacity-0'}`} />
+            <span className={`inline-block w-0.5 h-6 sm:h-8 bg-cyber-cyan ml-0.5 align-middle ${tick % 2 === 0 ? 'opacity-100' : 'opacity-0'}`} />
           </span>
         </div>
-        <p className="mt-6 text-base sm:text-lg text-ink-secondary font-sans max-w-xl mx-auto leading-relaxed">
+        <p className="mt-4 sm:mt-6 text-sm sm:text-base lg:text-lg text-ink-secondary font-sans max-w-xl mx-auto leading-relaxed">
           Sistem simulasi yang membaca sinyal di balik setiap jawaban — suara, wajah, jeda, dan pola perilaku — secara serentak.
         </p>
       </div>

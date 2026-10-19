@@ -153,9 +153,9 @@ export const SubjectMonitor: React.FC<SubjectMonitorProps> = ({
     <div className="rounded-xl bg-panel-bg border border-border-subtle p-4 flex flex-col justify-between h-full neon-border-cyan">
       
       {/* Top Header & Toggle Hardware Buttons */}
-      <div className="flex items-center justify-between pb-3.5 mb-3.5 border-b border-border-subtle">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3.5 mb-3.5 border-b border-border-subtle gap-3">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-cyber-cyan/10 border border-cyber-cyan/30 text-cyber-cyan flex items-center justify-center">
+          <div className="w-8 h-8 rounded-lg bg-cyber-cyan/10 border border-cyber-cyan/30 text-cyber-cyan flex items-center justify-center shrink-0">
             <Camera size={15} />
           </div>
           <div>
@@ -169,10 +169,10 @@ export const SubjectMonitor: React.FC<SubjectMonitorProps> = ({
         </div>
 
         {/* Action Controls for Real Camera & Mic */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 w-full sm:w-auto">
           <button
             onClick={onToggleWebcam}
-            className={`px-3 py-1.5 rounded-lg border text-xs font-mono font-semibold tracking-widest uppercase transition-all cursor-pointer ${
+            className={`flex-1 sm:flex-initial px-3 py-1.5 rounded-lg border text-xs font-mono font-semibold tracking-widest uppercase transition-all cursor-pointer text-center ${
               isWebcamActive
                 ? 'bg-cyber-cyan text-background border-cyber-cyan'
                 : 'bg-transparent border-border-subtle text-ink-secondary hover:border-cyber-cyan/40 hover:text-cyber-cyan'
@@ -183,7 +183,7 @@ export const SubjectMonitor: React.FC<SubjectMonitorProps> = ({
 
           <button
             onClick={onToggleMic}
-            className={`px-3 py-1.5 rounded-lg border text-xs font-mono font-semibold tracking-widest uppercase transition-all cursor-pointer ${
+            className={`flex-1 sm:flex-initial px-3 py-1.5 rounded-lg border text-xs font-mono font-semibold tracking-widest uppercase transition-all cursor-pointer text-center ${
               isMicActive
                 ? 'bg-cyber-cyan text-background border-cyber-cyan'
                 : 'bg-transparent border-border-subtle text-ink-secondary hover:border-cyber-cyan/40 hover:text-cyber-cyan'

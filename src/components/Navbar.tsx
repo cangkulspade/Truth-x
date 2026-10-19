@@ -1,5 +1,5 @@
-import React from 'react';
-import { Volume2, VolumeX } from 'lucide-react';
+import React, { useState } from 'react';
+import { Volume2, VolumeX, Menu, X, Play } from 'lucide-react';
 
 export type PageType = 'home' | 'demo' | 'tech';
 
@@ -24,6 +24,13 @@ export const Navbar: React.FC<NavbarProps> = ({
   activeSection,
   onNavigate,
 }) => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const handleMobileNav = (id: string) => {
+    onNavigate(id);
+    setMobileMenuOpen(false);
+  };
+
   return (
     <header className="fixed top-0 inset-x-0 z-50 h-16 border-b border-border-subtle bg-background/90 backdrop-blur-md">
       <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 flex items-center justify-between gap-4">
@@ -31,14 +38,14 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Brand */}
         <div
           className="flex items-center cursor-pointer"
-          onClick={() => onNavigate('home')}
+          onClick={() => handleMobileNav('home')}
         >
           <span className="text-xl font-bold tracking-widest text-ink-primary font-mono uppercase neon-text-cyan flicker">
             TRUTH-X
           </span>
         </div>
 
-        {/* Center Tab Navigation */}
+        {/* Desktop / Tablet Navigation */}
         <nav className="hidden md:flex items-center gap-1 px-2 py-1.5 rounded-full border border-border-subtle bg-panel-bg">
           {NAV_LINKS.map((link) => (
             <button
@@ -63,7 +70,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="p-2 rounded-lg border border-border-subtle bg-panel-bg text-ink-secondary hover:text-cyber-cyan hover:border-cyber-cyan/40 transition-all cursor-pointer"
             aria-label="Toggle Audio"
           >
-            {soundEnabled ? <Volume2 size={15} /> : <VolumeX size={15} />}
+            {soundEnabled ? <Volume2 size={16} /> : <VolumeX size={16} />}
           </button>
 
           <button
@@ -72,9 +79,50 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             MULAI UJI
           </button>
+
+          {/* Mobile hamburger toggle button */}
+          <button
+            onClick={() => setMobileMenuOpen(prev => !prev)}
+            className="p-2 md:hidden rounded-lg border border-border-subtle bg-panel-bg text-ink-secondary hover:text-cyber-cyan transition-colors cursor-pointer"
+            aria-label="Buka menu navigasi"
+          >
+            {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
+          </button>
         </div>
 
       </div>
+
+      {/* Mobile Drawer Dropdown */}
+      {mobileMenuOpen && (
+        <div className="md:hidden border-b border-border-subtle bg-panel-bg/95 backdrop-blur-xl px-4 py-4 space-y-2 animate-in fade-in slide-in-from-top-2 duration-150 shadow-2xl">
+          <div className="grid grid-cols-3 gap-2 pb-2">
+            {NAV_LINKS.map((link) => (
+              <button
+                key={link.id}
+                onClick={() => handleMobileNav(link.id)}
+                className={`py-2 px-3 rounded-lg text-xs font-mono font-semibold tracking-wider uppercase text-center border transition-all ${
+                  activeSection === link.id
+                    ? 'bg-cyber-cyan/15 text-cyber-cyan border-cyber-cyan/40'
+                    : 'bg-black/30 border-border-subtle text-ink-muted hover:text-ink-primary'
+                }`}
+              >
+                {link.label}
+              </button>
+            ))}
+          </div>
+
+          <button
+            onClick={() => {
+              handleMobileNav('demo');
+              onStartAnalysis();
+            }}
+            className="w-full py-2.5 rounded-lg bg-cyber-cyan text-slate-950 font-mono text-xs font-bold tracking-widest uppercase flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(0,242,254,0.3)]"
+          >
+            <Play size={13} className="fill-current" />
+            <span>Mulai Uji Sekarang</span>
+          </button>
+        </div>
+      )}
     </header>
   );
 };
