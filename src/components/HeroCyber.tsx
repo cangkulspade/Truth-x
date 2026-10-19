@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Play, ChevronRight, Shield, Mic, ScanFace, Activity, Timer } from 'lucide-react';
 
 interface HeroCyberProps {
@@ -6,38 +6,7 @@ interface HeroCyberProps {
   onGoToTech: () => void;
 }
 
-const TYPING_WORDS = ['Deception', 'Anxiety', 'Inconsistency', 'Hesitation', 'Concealment'];
-
 export const HeroCyber: React.FC<HeroCyberProps> = ({ onGoToDemo, onGoToTech }) => {
-  const [wordIndex, setWordIndex] = useState(0);
-  const [displayed, setDisplayed] = useState('');
-  const [deleting, setDeleting] = useState(false);
-  const [tick, setTick] = useState(0);
-
-  useEffect(() => {
-    const word = TYPING_WORDS[wordIndex];
-    let timeout: number;
-
-    if (!deleting && displayed.length < word.length) {
-      timeout = window.setTimeout(() => setDisplayed(word.slice(0, displayed.length + 1)), 80);
-    } else if (!deleting && displayed.length === word.length) {
-      timeout = window.setTimeout(() => setDeleting(true), 1800);
-    } else if (deleting && displayed.length > 0) {
-      timeout = window.setTimeout(() => setDisplayed(displayed.slice(0, -1)), 40);
-    } else if (deleting && displayed.length === 0) {
-      setDeleting(false);
-      setWordIndex((prev) => (prev + 1) % TYPING_WORDS.length);
-    }
-
-    return () => clearTimeout(timeout);
-  }, [displayed, deleting, wordIndex]);
-
-  // Blinking cursor tick
-  useEffect(() => {
-    const t = setInterval(() => setTick(p => p + 1), 500);
-    return () => clearInterval(t);
-  }, []);
-
   const signals = [
     { icon: <Mic size={14} />, label: 'Pola Suara', color: 'text-cyber-cyan border-cyber-cyan/30 bg-cyber-cyan/5' },
     { icon: <ScanFace size={14} />, label: 'Respon Wajah', color: 'text-sky-400 border-sky-400/30 bg-sky-400/5' },
@@ -62,11 +31,10 @@ export const HeroCyber: React.FC<HeroCyberProps> = ({ onGoToDemo, onGoToTech }) 
         <h1 className="text-4xl xs:text-5xl sm:text-7xl lg:text-8xl font-black font-mono tracking-tight leading-none text-ink-primary mb-2">
           TRUTH-X
         </h1>
-        <div className="text-lg xs:text-xl sm:text-3xl lg:text-4xl font-bold font-mono text-ink-secondary mt-2 sm:mt-3 min-h-[2.5rem] flex flex-wrap items-center justify-center gap-1">
+        <div className="text-lg xs:text-xl sm:text-3xl lg:text-4xl font-bold font-mono text-ink-secondary mt-2 sm:mt-3 min-h-[2.5rem] flex flex-wrap items-center justify-center gap-2">
           <span>Mendeteksi</span>
-          <span className="text-cyber-cyan neon-text-cyan text-left">
-            {displayed}
-            <span className={`inline-block w-0.5 h-6 sm:h-8 bg-cyber-cyan ml-0.5 align-middle ${tick % 2 === 0 ? 'opacity-100' : 'opacity-0'}`} />
+          <span className="text-cyber-cyan neon-text-cyan">
+            Kebohongan
           </span>
         </div>
         <p className="mt-4 sm:mt-6 text-sm sm:text-base lg:text-lg text-ink-secondary font-sans max-w-xl mx-auto leading-relaxed">
